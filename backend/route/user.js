@@ -12,11 +12,6 @@ const UserValid = zod.object({
   password: zod.string().min(6),
 });
 
-route.get("/", async (req, res) => {
-  const response = await Todos.find({});
-  res.json(response);
-});
-
 route.post("/signup", async (req, res) => {
   const validity = UserValid.safeParse(req.body);
   if (!validity.success) {
@@ -50,6 +45,24 @@ route.post("/signin", async (req, res) => {
       token: `your token is this ${token}`,
     });
   }
+});
+
+route.post("/todos", async (req, res) => {
+  const title = req.body.title;
+  const description = req.body.description;
+  await Todos.create({
+    title: title,
+    description: description,
+  });
+
+  res.status(200).json({
+    msg: "Todo created",
+  });
+});
+
+route.get("/", async (req, res) => {
+  const response = await Todos.find({});
+  res.json(response);
 });
 
 route.listen(3000);
