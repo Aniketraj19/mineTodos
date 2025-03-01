@@ -6,7 +6,8 @@ const jwt = require("jsonwebtoken");
 const zod = require("zod");
 const authMiddleWare = require("../middleware/authMiddleWare");
 const jwtPass = "secretPassword";
-
+const cors = require("cors");
+route.use(cors());
 const UserValid = zod.object({
   username: zod.string().email(),
   password: zod.string().min(6),
@@ -34,6 +35,7 @@ route.post("/signin", async (req, res) => {
     username: req.body.username,
     password: req.body.password,
   });
+  console.log(req.body.username);
   if (!signin) {
     res.status(404).json({
       msg: "User Not Found",
