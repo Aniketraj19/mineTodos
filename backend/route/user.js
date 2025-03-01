@@ -62,7 +62,7 @@ route.post("/todos", async (req, res) => {
   });
 });
 
-route.get("/", async (req, res) => {
+route.get("/showtodos", async (req, res) => {
   const response = await Todos.find({});
   res.json(response);
 });
