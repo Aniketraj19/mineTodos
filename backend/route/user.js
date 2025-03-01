@@ -50,10 +50,10 @@ route.post("/signin", async (req, res) => {
 });
 
 route.post("/todos", async (req, res) => {
-  const title = req.body.title;
+  const todo = req.body.todo;
   const description = req.body.description;
   await Todos.create({
-    title: title,
+    todo: todo,
     description: description,
   });
 
