@@ -18,6 +18,7 @@ function App() {
     fetch("http://localhost:3000/showtodos").then(async function (res) {
       const response = await res.json();
       setTodos(response);
+      // console.log(response);
     });
   } catch (e) {
     console.log(e);
